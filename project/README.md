@@ -2,6 +2,12 @@
 
 Welcome to the starter code repository for the **Munder Difflin Paper Company Multi-Agent System Project**! This repository contains the starter code and tools you will need to design, build, and test a multi-agent system that supports core business operations at a fictional paper manufacturing company.
 
+https://github.com/udacity/agentic-ai-c4-exercises-demos/blob/main/lesson-6-multi-agent-state-coordination-and-orchestration/demo/demo.py
+
+#https://github.com/Jaroken/AgenticAI_Udacity/blob/main/Multi_Agent_AgenticAI_Nano_Course4_project/project_solution.py
+#https://github.com/SebAustin/AgenticAI/blob/main/4%20The%20Beaver's%20Choice%20Paper%20Company%20needs%20your%20help!/project_starter.py
+
+
 ## Project Context
 
 You’ve been hired as an AI consultant by Munder Difflin Paper Company, a fictional enterprise looking to modernize their workflows. They need a smart, modular **multi-agent system** to automate:
@@ -39,6 +45,7 @@ Make sure you have Python 3.8+ installed.
 
 You can install all required packages using the provided requirements.txt file:
 
+`cd project`
 `pip install -r requirements.txt`
 
 If you're using smolagents, install it separately:

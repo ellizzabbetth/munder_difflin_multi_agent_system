@@ -1,0 +1,420 @@
+request_id,request_date,cash_balance,inventory_value,response
+1,2025-04-01,45059.7,4940.299999999999,"=== CUSTOMER REQUEST PROCESSED ===
+
+Request: I would like to request the following paper supplies for the ceremony: 
+
+- 200 sheets of A4 glossy paper
+- 100 sheets of heavy cardstock (white)
+- 100 sheets of colored paper (assorted colors)
+
+I need these supplies delivered by April 15, 2025. Thank you.
+Request Date: 2025-04-01
+
+=== INVENTORY CHECK ===
+Inventory check for request date 2025-04-01:
+Current stock of A4 glossy paper: 0 units
+Current stock of Heavyweight paper: 0 units
+Current stock of Colored paper: 788.0 units
+
+=== QUOTE GENERATED ===
+Item A4 glossy paper not found in inventory
+=== ORDER PROCESSING ===
+Could not determine total cost from quote
+=== RESTOCKING INFO ===
+No restocking needed at this time.
+"
+2,2025-04-03,45059.7,4940.299999999999,"=== CUSTOMER REQUEST PROCESSED ===
+
+Request: I would like to place an order for 500 sheets of colorful poster paper, 300 roll of streamers, and 200 balloons for the parade. Please deliver the supplies by April 15, 2025. Thank you.
+Request Date: 2025-04-03
+
+=== INVENTORY CHECK ===
+Inventory check for request date 2025-04-03:
+Current stock of Poster paper: 0 units
+Current stock of streamers: 0 units
+
+=== QUOTE GENERATED ===
+Item Poster paper not found in inventory
+=== ORDER PROCESSING ===
+Could not determine total cost from quote
+=== RESTOCKING INFO ===
+No restocking needed at this time.
+"
+3,2025-04-04,45059.7,4940.299999999999,"=== CUSTOMER REQUEST PROCESSED ===
+
+Request: I need to order 10,000 sheets of A4 paper, 5,000 sheets of A3 paper, and 500 reams of printer paper. The supplies must be delivered by April 15, 2025, for our upcoming conference. Please confirm the order and delivery schedule.
+Request Date: 2025-04-04
+
+=== INVENTORY CHECK ===
+Inventory check for request date 2025-04-04:
+Current stock of A4 paper: 272.0 units
+Current stock of a3 paper: 0 units
+Current stock of printer paper. the supplies must be delivered by april 15: 0 units
+
+=== QUOTE GENERATED ===
+Item a3 paper not found in inventory
+=== ORDER PROCESSING ===
+Could not determine total cost from quote
+=== RESTOCKING INFO ===
+No restocking needed at this time.
+"
+4,2025-04-05,45059.7,4940.299999999999,"=== CUSTOMER REQUEST PROCESSED ===
+
+Request: I need 500 sheets of high-quality, recycled cardstock in various colors for our reception, along with 250 sheets of A4 size printer paper. I need the order delivered by April 15, 2025.
+Request Date: 2025-04-05
+
+=== INVENTORY CHECK ===
+Inventory check for request date 2025-04-05:
+Current stock of high-quality: 0 units
+Current stock of A4 paper: 272.0 units
+
+=== QUOTE GENERATED ===
+Item high-quality not found in inventory
+=== ORDER PROCESSING ===
+Could not determine total cost from quote
+=== RESTOCKING INFO ===
+No restocking needed at this time.
+"
+5,2025-04-05,45059.7,4940.299999999999,"=== CUSTOMER REQUEST PROCESSED ===
+
+Request: I would like to place an order for 500 sheets of 8.5""x11"" colored paper, 300 sheets of cardstock in various colors, and 200 rolls of decorative washi tape. I need these supplies delivered by April 15, 2025, for an upcoming party. Thank you!
+Request Date: 2025-04-05
+
+=== INVENTORY CHECK ===
+Inventory check for request date 2025-04-05:
+Current stock of Colored paper: 788.0 units
+Current stock of Cardstock: 595.0 units
+Current stock of Decorative adhesive tape (washi tape): 0 units
+
+=== QUOTE GENERATED ===
+Item Decorative adhesive tape (washi tape) not found in inventory
+=== ORDER PROCESSING ===
+Could not determine total cost from quote
+=== RESTOCKING INFO ===
+No restocking needed at this time.
+"
+6,2025-04-06,45059.7,4940.299999999999,"=== CUSTOMER REQUEST PROCESSED ===
+
+Request: I would like to order 500 sheets of colorful construction paper, 300 sheets of white printer paper, and 200 sheets of cardstock in various colors. We need these supplies delivered by April 15, 2025, for our upcoming assembly.
+Request Date: 2025-04-06
+
+=== INVENTORY CHECK ===
+Inventory check for request date 2025-04-06:
+Current stock of Construction paper: 0 units
+Current stock of white printer paper: 0 units
+Current stock of Cardstock: 595.0 units
+
+=== QUOTE GENERATED ===
+Item Construction paper not found in inventory
+=== ORDER PROCESSING ===
+Could not determine total cost from quote
+=== RESTOCKING INFO ===
+No restocking needed at this time.
+"
+7,2025-04-07,45059.7,4940.299999999999,"=== CUSTOMER REQUEST PROCESSED ===
+
+Request: I would like to place a large order for various types of paper supplies for our upcoming exhibition. We need the following items:
+
+- 500 sheets of glossy A4 paper
+- 1000 sheets of matte A3 paper
+- 300 poster boards (24"" x 36"")
+- 200 sheets of heavyweight cardstock
+
+We need these supplies delivered by April 15, 2025. Thank you.
+Request Date: 2025-04-07
+
+=== INVENTORY CHECK ===
+Inventory check for request date 2025-04-07:
+Current stock of A4 glossy paper: 0 units
+Current stock of matte a3 paper: 0 units
+Current stock of Heavyweight paper: 0 units
+
+=== QUOTE GENERATED ===
+Item A4 glossy paper not found in inventory
+=== ORDER PROCESSING ===
+Could not determine total cost from quote
+=== RESTOCKING INFO ===
+No restocking needed at this time.
+"
+8,2025-04-07,45059.7,4940.299999999999,"=== CUSTOMER REQUEST PROCESSED ===
+
+Request: I would like to place a large order for the following paper supplies for an upcoming ceremony: 
+
+- 500 sheets of A4 glossy paper 
+- 1000 sheets of A4 matte paper 
+- 2000 sheets of A5 colored paper 
+- 3000 sheets of A4 recycled paper 
+
+Please ensure delivery by April 15, 2025. Thank you.
+Request Date: 2025-04-07
+
+=== INVENTORY CHECK ===
+Inventory check for request date 2025-04-07:
+Current stock of A4 glossy paper: 0 units
+Current stock of A4 matte paper: 0 units
+Current stock of Colored paper: 788.0 units
+Current stock of A4 recycled paper: 0 units
+
+=== QUOTE GENERATED ===
+Item A4 glossy paper not found in inventory
+=== ORDER PROCESSING ===
+Could not determine total cost from quote
+=== RESTOCKING INFO ===
+No restocking needed at this time.
+"
+9,2025-04-07,45059.7,4940.299999999999,"=== CUSTOMER REQUEST PROCESSED ===
+
+Request: I would like to place an order for the following paper supplies for the reception: 
+
+- 200 sheets of A4 white printer paper
+- 100 sheets of A3 glossy paper
+- 50 packets of 100% recycled kraft paper envelopes
+
+I need these supplies delivered by April 10, 2025. Thank you.
+Request Date: 2025-04-07
+
+=== INVENTORY CHECK ===
+Inventory check for request date 2025-04-07:
+Current stock of A4 paper: 272.0 units
+Current stock of a3 glossy paper: 0 units
+
+=== QUOTE GENERATED ===
+Item a3 glossy paper not found in inventory
+=== ORDER PROCESSING ===
+Could not determine total cost from quote
+=== RESTOCKING INFO ===
+No restocking needed at this time.
+"
+13,2025-04-08,45059.7,4940.299999999999,"=== CUSTOMER REQUEST PROCESSED ===
+
+Request: I would like to order 500 sheets of A4 printing paper and 200 sheets of cardstock for our upcoming gathering. Please deliver the supplies by April 10, 2025.
+Request Date: 2025-04-08
+
+=== INVENTORY CHECK ===
+Inventory check for request date 2025-04-08:
+Current stock of A4 paper: 272.0 units
+
+=== QUOTE GENERATED ===
+Quote Summary:
+Request Date: 2025-04-08
+
+A4 paper: 500 × $0.05 = $25.00
+  Available stock: 272.0 units
+
+Subtotal: $25.00
+Bulk Discount (5%): -$1.25
+Final Total: $23.75
+
+=== ORDER PROCESSING ===
+Cannot process order due to insufficient stock:
+A4 paper: Need 500, have 272.0
+=== RESTOCKING INFO ===
+No restocking needed at this time.
+"
+12,2025-04-08,45059.7,4940.299999999999,"=== CUSTOMER REQUEST PROCESSED ===
+
+Request: I would like to order 200 sheets of colorful cardstock, 500 sheets of standard printer paper, and 100 paper napkins for our upcoming party. Please deliver these supplies by April 15, 2025.
+Request Date: 2025-04-08
+
+=== INVENTORY CHECK ===
+Inventory check for request date 2025-04-08:
+Current stock of Cardstock: 595.0 units
+Current stock of standard printer paper: 0 units
+
+=== QUOTE GENERATED ===
+Item standard printer paper not found in inventory
+=== ORDER PROCESSING ===
+Could not determine total cost from quote
+=== RESTOCKING INFO ===
+No restocking needed at this time.
+"
+10,2025-04-08,45059.7,4940.299999999999,"=== CUSTOMER REQUEST PROCESSED ===
+
+Request: I would like to place an order for 500 sheets of high-quality glossy paper and 300 sheets of sturdy cardstock for our upcoming show. We need the supplies delivered by April 15, 2025.
+Request Date: 2025-04-08
+
+=== INVENTORY CHECK ===
+Inventory check for request date 2025-04-08:
+Current stock of Cardstock: 595.0 units
+
+=== QUOTE GENERATED ===
+Quote Summary:
+Request Date: 2025-04-08
+
+Cardstock: 500 × $0.15 = $75.00
+  Available stock: 595.0 units
+
+Subtotal: $75.00
+Bulk Discount (5%): -$3.75
+Final Total: $71.25
+
+=== ORDER PROCESSING ===
+Order processed successfully!
+Total cost: $71.25
+Order date: 2025-04-08
+=== RESTOCKING INFO ===
+No restocking needed at this time.
+"
+11,2025-04-08,45059.7,4940.299999999999,"=== CUSTOMER REQUEST PROCESSED ===
+
+Request: I would like to order 500 sheets of A3 glossy paper and 300 sheets of A4 matte paper for our exhibition. The supplies are needed by April 15, 2025. Thank you.
+Request Date: 2025-04-08
+
+=== INVENTORY CHECK ===
+Inventory check for request date 2025-04-08:
+Current stock of A4 glossy paper: 0 units
+
+=== QUOTE GENERATED ===
+Item A4 glossy paper not found in inventory
+=== ORDER PROCESSING ===
+Could not determine total cost from quote
+=== RESTOCKING INFO ===
+No restocking needed at this time.
+"
+14,2025-04-09,45130.95,4865.3,"=== CUSTOMER REQUEST PROCESSED ===
+
+Request: I would like to place a large order for high-quality paper supplies for our upcoming performance. We need 5,000 sheets of A4 paper, 2,000 sheets of poster paper in various colors, and 500 sheets of cardstock. Please deliver these supplies by April 15, 2025. Thank you.
+Request Date: 2025-04-09
+
+=== INVENTORY CHECK ===
+Inventory check for request date 2025-04-09:
+Current stock of A4 paper: 272.0 units
+Current stock of Poster paper: 0 units
+Current stock of Cardstock: 95.0 units
+
+=== QUOTE GENERATED ===
+Item Poster paper not found in inventory
+=== ORDER PROCESSING ===
+Could not determine total cost from quote
+=== RESTOCKING INFO ===
+Restocking required:
+Cardstock: Restock 500 units, delivery by 2025-04-13
+"
+15,2025-04-12,45130.95,4865.3,"=== CUSTOMER REQUEST PROCESSED ===
+
+Request: I would like to place a large order for high-quality paper supplies for our upcoming demonstration. Please provide the following:
+
+- 10,000 sheets of A4 white paper
+- 5,000 sheets of A3 colored paper (assorted colors)
+- 500 reams of cardboard for signage
+
+I need these supplies delivered by April 15, 2025. Thank you.
+Request Date: 2025-04-12
+
+=== INVENTORY CHECK ===
+Inventory check for request date 2025-04-12:
+Current stock of A4 paper: 272.0 units
+Current stock of Colored paper: 788.0 units
+Current stock of cardboard for signage: 0 units
+
+=== QUOTE GENERATED ===
+Item cardboard for signage not found in inventory
+=== ORDER PROCESSING ===
+Could not determine total cost from quote
+=== RESTOCKING INFO ===
+No restocking needed at this time.
+"
+16,2025-04-13,45130.95,4865.3,"=== CUSTOMER REQUEST PROCESSED ===
+
+Request: I would like to place an order for 500 sheets of A4 printer paper, 200 sheets of colorful construction paper, and 100 sheets of poster board. I need these supplies delivered by April 15, 2025, in time for our assembly event.
+Request Date: 2025-04-13
+
+=== INVENTORY CHECK ===
+Inventory check for request date 2025-04-13:
+Current stock of A4 paper: 272.0 units
+Current stock of Construction paper: 0 units
+Current stock of poster board. i need these supplies delivered by april 15: 0 units
+
+=== QUOTE GENERATED ===
+Item Construction paper not found in inventory
+=== ORDER PROCESSING ===
+Could not determine total cost from quote
+=== RESTOCKING INFO ===
+No restocking needed at this time.
+"
+17,2025-04-14,45130.95,4865.3,"=== CUSTOMER REQUEST PROCESSED ===
+
+Request: I would like to place a medium order for the following paper supplies for our upcoming reception:
+
+- 1000 sheets of A4 white printer paper
+- 500 sheets of A3 colored paper (assorted colors)
+- 2000 table napkins (white)
+- 1000 paper cups (biodegradable)
+- 500 paper plates (biodegradable)
+
+I need these supplies delivered by April 15, 2025. Thank you.
+Request Date: 2025-04-14
+
+=== INVENTORY CHECK ===
+Inventory check for request date 2025-04-14:
+Current stock of A4 paper: 272.0 units
+Current stock of Colored paper: 788.0 units
+
+=== QUOTE GENERATED ===
+Quote Summary:
+Request Date: 2025-04-14
+
+A4 paper: 1000 × $0.05 = $50.00
+  Available stock: 272.0 units
+Colored paper: 500 × $0.10 = $50.00
+  Available stock: 788.0 units
+
+Subtotal: $100.00
+Bulk Discount (5%): -$5.00
+Final Total: $95.00
+
+=== ORDER PROCESSING ===
+Cannot process order due to insufficient stock:
+A4 paper: Need 1000, have 272.0
+=== RESTOCKING INFO ===
+No restocking needed at this time.
+"
+18,2025-04-14,45130.95,4865.3,"=== CUSTOMER REQUEST PROCESSED ===
+
+Request: I would like to place a medium order for the following paper supplies for our upcoming ceremony: 500 sheets of high-quality white cardstock, 1000 sheets of standard printing paper, and 200 sheets of colored paper in assorted colors. I need these supplies delivered by April 15, 2025.
+Request Date: 2025-04-14
+
+=== INVENTORY CHECK ===
+Inventory check for request date 2025-04-14:
+Current stock of Cardstock: 95.0 units
+Current stock of standard printing paper: 0 units
+Current stock of Colored paper: 788.0 units
+
+=== QUOTE GENERATED ===
+Item standard printing paper not found in inventory
+=== ORDER PROCESSING ===
+Could not determine total cost from quote
+=== RESTOCKING INFO ===
+Restocking required:
+Cardstock: Restock 500 units, delivery by 2025-04-18
+"
+19,2025-04-15,45130.95,4865.3,"=== CUSTOMER REQUEST PROCESSED ===
+
+Request: Dear [Manufacturer's Name],
+
+I would like to place an order for the following paper supplies for our upcoming exhibition:
+
+- 2000 sheets of A4 glossy paper
+- 1500 sheets of A3 matte paper
+- 1000 sheets of cardstock in assorted colors
+
+We need the supplies delivered by April 20, 2025.
+
+Thank you!
+Request Date: 2025-04-15
+
+=== INVENTORY CHECK ===
+Inventory check for request date 2025-04-15:
+Current stock of A4 glossy paper: 0 units
+Current stock of a3 matte paper: 0 units
+Current stock of Cardstock: 95.0 units
+
+=== QUOTE GENERATED ===
+Item A4 glossy paper not found in inventory
+=== ORDER PROCESSING ===
+Could not determine total cost from quote
+=== RESTOCKING INFO ===
+Restocking required:
+Cardstock: Restock 1000 units, delivery by 2025-04-19
+"
+20,2025-04-17,45130.95,4865.3,Could not identify specific items and quantities in the request.

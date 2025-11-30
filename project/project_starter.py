@@ -2,12 +2,26 @@ import pandas as pd
 import numpy as np
 import os
 import time
-import dotenv
+from dotenv import load_dotenv
 import ast
 from sqlalchemy.sql import text
 from datetime import datetime, timedelta
 from typing import Dict, List, Union
+import random
+import re
 from sqlalchemy import create_engine, Engine
+from typing import Dict, List, Any, Optional
+
+from datetime import datetime, timedelta
+
+from dataclasses import dataclass, field, asdict
+from smolagents import (
+    ToolCallingAgent,
+    OpenAIServerModel,
+    tool,
+)
+
+
 
 # Create an SQLite database
 db_engine = create_engine("sqlite:///munder_difflin.db")
@@ -449,7 +463,6 @@ def get_cash_balance(as_of_date: Union[str, datetime]) -> float:
         print(f"Error getting cash balance: {e}")
         return 0.0
 
-
 def generate_financial_report(as_of_date: Union[str, datetime]) -> Dict:
     """
     Generate a complete financial report for the company as of a specific date.
@@ -520,7 +533,6 @@ def generate_financial_report(as_of_date: Union[str, datetime]) -> Dict:
         "top_selling_products": top_selling_products,
     }
 
-
 def search_quote_history(search_terms: List[str], limit: int = 5) -> List[Dict]:
     """
     Retrieve a list of historical quotes that match any of the provided search terms.
@@ -590,23 +602,302 @@ def search_quote_history(search_terms: List[str], limit: int = 5) -> List[Dict]:
 
 
 # Set up and load your env parameters and instantiate your model.
+load_dotenv()
 
+openai_api_key = os.getenv("UDACITY_OPENAI_API_KEY")
+
+model = OpenAIServerModel(
+    model_id="gpt-4o-mini",
+    api_base="https://openai.vocareum.com/v1",
+    api_key=openai_api_key,
+)
 
 """Set up tools for your agents to use, these should be methods that combine the database functions above
  and apply criteria to them to ensure that the flow of the system is correct."""
 
 
-# Tools for inventory agent
+@dataclass
+class PaperOrder:
+    order_id: str
+    pasta_shape: str
+    quantity: float  # in kg
+    status: str = "pending"  # pending, queued, completed, cancelled
+    timestamp: str = field(default_factory=lambda: datetime.now().isoformat())
+    priority: int = 1  # 1 = normal, 2 = rush, 3 = emergency
+    customer_notes: str = ""
+    estimated_delivery_date: str = ""
 
+@dataclass
+class FactoryState:
+    inventory: Dict[str, float] = field(default_factory=lambda: {
+        "flour": 10.0,  # kg
+        "water": 5.0,   # liters
+        "eggs": 24,     # count
+        "semolina": 8.0 # kg
+    })
+    production_queue: List[PaperOrder] = field(default_factory=list)
+    pasta_recipes: Dict[str, Dict[str, float]] = field(default_factory=lambda: {
+        "spaghetti": {"flour": 0.2, "water": 0.1},
+        "fettuccine": {"flour": 0.25, "water": 0.1},
+        "penne": {"flour": 0.2, "water": 0.1},
+        "ravioli": {"flour": 0.3, "water": 0.1, "eggs": 2},
+        "lasagna": {"flour": 0.3, "water": 0.15, "eggs": 3}
+    })
+    custom_recipes: Dict[str, Dict[str, float]] = field(default_factory=dict)
+    order_counter: int = 0
+    known_pasta_shapes: List[str] = field(default_factory=lambda: [
+        "spaghetti", "fettuccine", "penne", "ravioli", "lasagna"
+    ])
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "inventory": self.inventory,
+            "production_queue": [asdict(order) for order in self.production_queue],
+            "pasta_recipes": self.pasta_recipes,
+            "custom_recipes": self.custom_recipes
+        }
+# Initialize the shared factory state
+factory_state = FactoryState()
+
+# Tools for inventory agent
+@tool
+def check_inventory() -> Dict[str, float]:
+    """Check current inventory levels of all ingredients."""
+    return factory_state.inventory
 
 # Tools for quoting agent
 
+@tool
+def update_inventory(ingredient: str, amount: float) -> Dict[str, Any]:
+    """
+    Update the inventory amount for a specific ingredient.
+    
+    Args:
+        ingredient: Name of the ingredient
+        amount: New amount (will replace current amount)
+        
+    Returns:
+        Status of the inventory update
+    """
+    if ingredient not in factory_state.inventory:
+        return {
+            "success": False,
+            "message": f"Unknown ingredient: {ingredient}. Cannot update inventory."
+        }
+    
+    old_amount = factory_state.inventory[ingredient]
+    factory_state.inventory[ingredient] = amount
+    
+    return {
+        "success": True,
+        "message": f"Inventory updated: {ingredient} from {old_amount} to {amount}.",
+        "ingredient": ingredient,
+        "old_amount": old_amount,
+        "new_amount": amount
+    }
+
 
 # Tools for ordering agent
+@tool
+def create_custom_pasta_recipe(
+    pasta_name: str,
+    ingredients: Dict[str, float]
+) -> Dict[str, Any]:
+    """
+    Create a custom pasta recipe with specific ingredient ratios.
+    
+    Args:
+        pasta_name: Name of the custom pasta
+        ingredients: Dictionary mapping ingredient names to amounts needed per kg
+        
+    Returns:
+        Status of the recipe creation
+    """
+    # Validate ingredients exist in inventory
+    for ingredient in ingredients:
+        if ingredient not in factory_state.inventory:
+            return {
+                "success": False,
+                "message": f"Unknown ingredient: {ingredient}. We don't have this in our inventory."
+            }
+    
+    # Check if recipe name already exists
+    if pasta_name in factory_state.pasta_recipes or pasta_name in factory_state.custom_recipes:
+        return {
+            "success": False,
+            "message": f"A recipe for '{pasta_name}' already exists."
+        }
+    
+    # Add the custom recipe
+    factory_state.custom_recipes[pasta_name] = ingredients
+    
+    # Update known pasta shapes
+    factory_state.update_known_pasta_shapes()
+    
+    return {
+        "success": True,
+        "message": f"Custom pasta recipe '{pasta_name}' created successfully.",
+        "recipe": ingredients
+    }
+
+@tool
+def prioritize_order(order_id: str, new_priority: int) -> Dict[str, Any]:
+    """
+    Change the priority of an existing order in the queue.
+    
+    Args:
+        order_id: ID of the order to update
+        new_priority: New priority level (1=normal, 2=rush, 3=emergency)
+        
+    Returns:
+        Status of the priority change
+    """
+    # Validate priority level
+    if new_priority not in [1, 2, 3]:
+        return {
+            "success": False,
+            "message": f"Invalid priority level: {new_priority}. Must be 1 (normal), 2 (rush), or 3 (emergency)."
+        }
+    
+    # Find the order in the queue
+    order_found = False
+    for order in factory_state.production_queue:
+        if order.order_id == order_id:
+            order_found = True
+            old_priority = order.priority
+            
+            # Update priority
+            order.priority = new_priority
+            
+            # Recalculate estimated delivery date
+            capacity_info = check_production_capacity()
+            days_to_complete = capacity_info["days_to_complete_current_queue"]
+            
+            if new_priority > 1:
+                # Emergency orders get processed in 1 day
+                if new_priority == 3:
+                    days_to_complete = 1
+                # Rush orders get priority over normal orders
+                elif new_priority == 2:
+                    days_to_complete = max(1, days_to_complete / 2)
+            
+            # Add 1 day for the order itself
+            total_days = max(1, int(days_to_complete) + 1)
+            
+            # Calculate the new delivery date
+            new_delivery_date = (datetime.now() + timedelta(days=total_days)).strftime("%Y-%m-%d")
+            order.estimated_delivery_date = new_delivery_date
+            
+            return {
+                "success": True,
+                "message": f"Order {order_id} priority updated from {old_priority} to {new_priority}.",
+                "new_estimated_delivery_date": new_delivery_date
+            }
+    
+    if not order_found:
+        return {
+            "success": False,
+            "message": f"Order {order_id} not found in production queue."
+        }
 
 
 # Set up your agents and create an orchestration agent that will manage them.
 
+# ======= Agents =======
+
+class InventoryManagerAgent(ToolCallingAgent):
+    """Agent responsible for processing inventory requests."""
+    
+    def __init__(self, model):
+        super().__init__(
+            tools=[],
+            model=model,
+            name="inventory_processor",
+            description="Agent responsible for processing inventory."
+        )
+
+class QuoteProcessorAgent(ToolCallingAgent):
+    """Agent responsible for processing customer order requests."""
+    
+    def __init__(self, model):
+        super().__init__(
+            tools=[check_pasta_recipe, generate_order_id, list_available_pasta_shapes],
+            model=model,s
+            name="quote_processor",
+            description="Agent responsible for processing customer orders. Parses requests, identifies pasta shapes and quantities."
+        )
+
+class OrderProcessorAgent(ToolCallingAgent):
+    """Agent responsible for processing customer order requests."""
+    
+    def __init__(self, model):
+        super().__init__(
+            tools=[],
+            model=model,
+            name="order_processor",
+            description="Agent responsible for processing customer orders. Parses requests, identifies pasta shapes and quantities."
+        )
+
+class CustomPaperDesignerAgent(ToolCallingAgent):
+    """Agent responsible for designing custom pasta recipes."""
+    
+    def __init__(self, model):
+        super().__init__(
+            tools=[check_inventory, create_custom_pasta_recipe],
+            model=model,
+            name="pasta_designer",
+            description="Agent responsible for creating custom pasta recipes based on customer requirements and available ingredients."
+        ) 
+     
+# ======= Factory Orchestrator =======
+# An orchestrator agent for handling customer inquiries and delegating tasks to different agents
+class PaperFactoryOrchestrator:
+    """Coordinates the multi-agent pasta factory system."""
+    
+    def __init__(self, model):
+        self.order_processor = OrderProcessorAgent(model)
+        self.inventory_manager = InventoryManagerAgent(model)
+        self.quote_processor = QuoteProcessorAgent(model)
+        self.paper_designer = CustomPaperDesignerAgent(model)
+
+    def extract_paper_details(self, response: str) -> Dict[str, Any]:
+        """
+        Extract paper details from an agent response.
+        
+        Args:
+            response: The agent's response text
+            
+        Returns:
+            Dictionary with extracted paper shape, quantity, etc.
+        """
+        order_details = {}
+        
+        # Extract pasta shape by looking for known shapes first
+        for shape in factory_state.known_pasta_shapes:
+            if shape.lower() in response.lower():
+                order_details["pasta_shape"] = shape
+                break
+        
+        # Extract order ID if present
+        order_id_match = re.search(r"ORD-\d{4}", response)
+        if order_id_match:
+            order_details["order_id"] = order_id_match.group(0)
+        
+        # Extract quantity
+        quantity_match = re.search(r"(\d+(?:\.\d+)?)\s*(?:kg|kgs|kilograms?)", response, re.IGNORECASE)
+        if quantity_match:
+            order_details["quantity"] = float(quantity_match.group(1))
+        
+        # Check if this seems like a priority order
+        if any(term in response.lower() for term in ["rush", "emergency", "urgent", "priority", "asap"]):
+            if "emergency" in response.lower():
+                order_details["priority"] = 3
+            else:
+                order_details["priority"] = 2
+        else:
+            order_details["priority"] = 1
+            
+        return order_details
 
 # Run your test scenarios by writing them here. Make sure to keep track of them.
 
@@ -669,6 +960,12 @@ def run_test_scenarios():
         ############
 
         # response = call_your_multi_agent_system(request_with_date)
+        orchestrator = PaperFactoryOrchestrator(model)
+    
+        print("Welcome to the Pasta Factory Multi-Agent System!")
+        print("Initial Factory State:", json.dumps(factory_state.to_dict(), indent=2))
+        response = orchestrator.process_order(order)
+        print(f"Factory: {response}")
 
         # Update state
         report = generate_financial_report(request_date)
